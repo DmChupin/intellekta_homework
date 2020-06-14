@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: @spring.profiles.active@
+    active: dev
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/diploma_dev

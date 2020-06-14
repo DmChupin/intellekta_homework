@@ -1,10 +1,10 @@
 package ru.education.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import ru.education.entity.AcademicAdviserJpa;
-import ru.education.entity.StudentJpa;
-import ru.education.jpa.AcademicAdviserJpaRepository;
-import ru.education.jpa.StudentJpaRepository;
+import ru.education.entity.AcademicAdviser;
+import ru.education.entity.Student;
+import ru.education.jpa.AcademicAdviserRepository;
+import ru.education.jpa.StudentRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,44 +13,44 @@ import java.util.Optional;
 @RequestMapping("api/v1/jpa")
 public class JpaController {
 
-    private final StudentJpaRepository studentJpaRepository;
+    private final StudentRepository studentRepository;
 
-    private final AcademicAdviserJpaRepository academicAdviserJpaRepository;
+    private final AcademicAdviserRepository academicAdviserRepository;
 
-    public JpaController(StudentJpaRepository studentJpaRepository, AcademicAdviserJpaRepository academicAdviserJpaRepository) {
-        this.studentJpaRepository = studentJpaRepository;
-        this.academicAdviserJpaRepository = academicAdviserJpaRepository;
+    public JpaController(StudentRepository studentRepository, AcademicAdviserRepository academicAdviserRepository) {
+        this.studentRepository = studentRepository;
+        this.academicAdviserRepository = academicAdviserRepository;
     }
 
 
     @GetMapping("/students")
-    public List<StudentJpa> getStudents(){
-        return studentJpaRepository.findAll();
+    public List<Student> getStudents(){
+        return studentRepository.findAll();
     }
 
     @GetMapping("/students/{id}")
-    public Optional<StudentJpa> getStudent(@PathVariable("id") Long id) {
-        return  studentJpaRepository.findById(id);
+    public Optional<Student> getStudent(@PathVariable("id") Long id) {
+        return  studentRepository.findById(id);
     }
 
     @PostMapping("/students")
-    public StudentJpa addStudents(@RequestBody StudentJpa studentJpa){
-        return studentJpaRepository.save(studentJpa);
+    public Student addStudents(@RequestBody Student student){
+        return studentRepository.save(student);
     }
 
     @GetMapping("/advisers")
-    public List<AcademicAdviserJpa> getAcademicAdvisers(){
-        return  academicAdviserJpaRepository.findAll();
+    public List<AcademicAdviser> getAcademicAdvisers(){
+        return  academicAdviserRepository.findAll();
     }
 
     @GetMapping("/advisers/{id}")
-    public Optional<AcademicAdviserJpa> getAcademicAdviset(@PathVariable("id") Long id) {
-        return  academicAdviserJpaRepository.findById(id);
+    public Optional<AcademicAdviser> getAcademicAdviset(@PathVariable("id") Long id) {
+        return  academicAdviserRepository.findById(id);
     }
 
     @PostMapping("/advisers")
-    public AcademicAdviserJpa addAcademicAdviser(@RequestBody AcademicAdviserJpa academicAdviserJpa){
-        return academicAdviserJpaRepository.save(academicAdviserJpa);
+    public AcademicAdviser addAcademicAdviser(@RequestBody AcademicAdviser academicAdviser){
+        return academicAdviserRepository.save(academicAdviser);
     }
 
 }
