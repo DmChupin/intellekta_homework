@@ -15,8 +15,8 @@ public class AcademicAdviserJpa {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "academic_adviser_id_seq")
-    @SequenceGenerator(name = "academic_adviser_id_seq", sequenceName = "academic_adviser_id_seq", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "academic_adviser_id_seq")
+//    @SequenceGenerator(name = "academic_adviser_id_seq", sequenceName = "academic_adviser_id_seq", allocationSize = 1)
     private long id;
 
     @Column(name = "name")

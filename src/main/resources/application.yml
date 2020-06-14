@@ -5,7 +5,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/diploma_dev
     username: postgres
-    password:
+    password: rocket146
   jpa:
     show-sql: true
     properties:
@@ -18,4 +18,4 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/diploma_prod
     username: postgres
-    password:
+    password: rocket146
