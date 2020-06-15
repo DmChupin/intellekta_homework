@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.education.entity.Student;
 import ru.education.exceptions.*;
-import ru.education.service.StudentService;
+import ru.education.service.impl.DefaultStudentService;
 
 import java.util.List;
 
@@ -22,11 +22,11 @@ import java.util.List;
 public class StudentTest {
 
     @Autowired
-    private StudentService studentService;
+    private DefaultStudentService defaultStudentService;
 
     @Test
     public void findAllTest() {
-        List<Student>  students = studentService.findAll();
+        List<Student>  students = defaultStudentService.findAll();
         Assert.assertEquals(students.size(), 8);
     }
 
@@ -34,44 +34,44 @@ public class StudentTest {
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createNullStudentException() {
-        studentService.create(null);
+        defaultStudentService.create(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createNullIdStudentException() {
         Student student = new Student(null, "name", "surname", "patronymic", null);
-        studentService.create(student);
+        defaultStudentService.create(student);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createNullNameStudentException() {
         Student student = new Student(22L, null, "surname", "patronymic", null);
-        studentService.create(student);
+        defaultStudentService.create(student);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void createNullSurnameStudentException() {
         Student student = new Student(22L, "name", null, "patronymic", null);
-        studentService.create(student);
+        defaultStudentService.create(student);
     }
 
 
     @Test(expected = EntityAlreadyExistsException.class)
     public  void createExistedStudentException() {
         Student student = new Student(1L, "name1", "surname", "patronymic", null);
-        studentService.create(student);
+        defaultStudentService.create(student);
     }
 
     @Test(expected = EntityConflictException.class)
     public void createExistedFioStudentException() {
         Student student = new Student(151L, "name", "surname", "patronymic", null);
-        studentService.create(student);
+        defaultStudentService.create(student);
     }
 
     @Before
     public void CreateStudentTest() {
         Student student = new Student(15L, "name", "surname", "patronymic", null);
-        studentService.create(student);
+        defaultStudentService.create(student);
     }
     //CREATE END
 
@@ -79,22 +79,22 @@ public class StudentTest {
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void FindStudentByNullIdException() {
-        studentService.findById(null);
+        defaultStudentService.findById(null);
     }
 
     @Test(expected = EntityIllegalArgumentException.class)
     public void FindStudentByIllegalFormatIdException() {
-        studentService.findById("id");
+        defaultStudentService.findById("id");
     }
 
     @Test(expected = EntityNotFoundException.class)
     public void FindStudentByNotExistedIdException() {
-        studentService.findById(12313);
+        defaultStudentService.findById(12313);
     }
 
     @Test
     public void FindStudentByIdTest() {
-        Student student = studentService.findById(1L);
+        Student student = defaultStudentService.findById(1L);
         Assert.assertNotNull(student);
     }
     //FIND BY ID END
@@ -103,8 +103,8 @@ public class StudentTest {
 
     @After
     public void deletStudentByIdTest() {
-        studentService.delete(15);
-        List<Student> students = studentService.findAll();
+        defaultStudentService.delete(15);
+        List<Student> students = defaultStudentService.findAll();
         Assert.assertEquals(students.size(), 7);
     }
 }
